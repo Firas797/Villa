@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -367,7 +366,21 @@ const ContactSection = ({ t, phoneNumber, whatsappMsg }) => {
 
 function App() {
   const [language, setLanguage] = useState('fr');
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    return saved === 'true';
+  });
   const t = translations[language];
+  
+  // Apply dark mode class to body
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
   
   // Refs for smooth scrolling
   const exteriorRef = useRef(null);
@@ -436,6 +449,10 @@ function App() {
     contactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   // Reusable Gallery Component
   const GallerySection = ({ title, images }) => (
     <div className="modern-gallery-section">
@@ -470,8 +487,8 @@ function App() {
   }, [language]);
 
   return (
-    <div className="app">
-      {/* Language Switcher */}
+    <div className={`app ${darkMode ? 'dark-mode-app' : ''}`}>
+      {/* Language Switcher & Dark Mode Toggle */}
       <div className="language-switcher">
         <button 
           className={`lang-btn ${language === 'fr' ? 'active' : ''}`} 
@@ -485,6 +502,14 @@ function App() {
           onClick={() => setLanguage('en')}
         >
           EN
+        </button>
+        <span className="lang-divider">|</span>
+        <button 
+          className={`dark-mode-btn ${darkMode ? 'active' : ''}`} 
+          onClick={toggleDarkMode}
+          aria-label="Toggle dark mode"
+        >
+          {darkMode ? '☀️' : '🌙'}
         </button>
       </div> 
 
@@ -925,10 +950,7 @@ function App() {
                 <span className="safety_name_x93">{t[device.key]}</span>
               </div>
             ))}
-            <div className="safety_item_x93">
-              <span className="safety_icon_x93">🚨</span>
-              <span className="safety_name_x93">{t.smokeDetector}</span>
-            </div>
+        
           </div>
         </div>
       </section>
