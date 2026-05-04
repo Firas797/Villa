@@ -63,7 +63,7 @@ const translations = {
     // Gallery Section Titles
     outside: "EXTÉRIEUR",
     inside: "INTÉRIEUR",
-    roomsAndBeds: "CHAMBRES & LITS",
+    roomsAndBeds: "SUITES ",
     // Properties section
     popularProperties: "SALLES DE BAINS & BATHROOMS",
     viewAll: "VOIR TOUS LES BIENS",
@@ -149,6 +149,16 @@ const translations = {
     footerDesc: "Villa de prestige avec vue imprenable, piscine et équipements luxueux.",
     followUs: "Suivez-nous",
     rights: "© 2025 Villa Luxe - Tous droits réservés.",
+    // Kerkennah section translations
+    kerkennahTitle: "DÉCOUVREZ KERKENNAH",
+    kerkennahSubtitle: "Un archipel préservé aux eaux cristallines, entre tradition et authenticité tunisienne",
+    kerkennahDesc: "Kerkennah est un archipel tunisien situé dans la mer Méditerranée, au large de Sfax. Connu pour ses paysages sauvages, ses plages de sable fin et son patrimoine unique, c'est une destination de paix et de beauté naturelle.",
+    kerkennahFeature1: "Plages préservées",
+    kerkennahFeature2: "Pêche traditionnelle",
+    kerkennahFeature3: "Ensoleillement 300 jours/an",
+    kerkennahGallery: "Galerie de Kerkennah",
+    satisfactionRate: "Taux de satisfaction",
+    satisfiedCustomers: "Clients satisfaits",
   },
   en: {
     aboutPropertyTitle: "ABOUT THE PROPERTY",
@@ -184,7 +194,7 @@ const translations = {
     compositionDesc: "Discover the layout and spaces of this magnificent villa",
     outside: "OUTSIDE",
     inside: "INSIDE",
-    roomsAndBeds: "ROOMS & BEDS",
+    roomsAndBeds: "SUITES ",
     popularProperties: "POPULAR PROPERTIES",
     viewAll: "VIEW ALL PROPERTIES",
     prop1Title: "5619 Walnut Hill Ln, Dallas, TX 75229",
@@ -262,6 +272,16 @@ const translations = {
     footerDesc: "Prestige villa with breathtaking view, pool and luxury amenities.",
     followUs: "Follow us",
     rights: "© 2025 Villa Luxe - All rights reserved.",
+    // Kerkennah section translations
+    kerkennahTitle: "DISCOVER KERKENNAH",
+    kerkennahSubtitle: "A preserved archipelago with crystal clear waters, between tradition and Tunisian authenticity",
+    kerkennahDesc: "Kerkennah is a Tunisian archipelago located in the Mediterranean Sea, off the coast of Sfax. Known for its wild landscapes, fine sandy beaches and unique heritage, it is a destination of peace and natural beauty.",
+    kerkennahFeature1: "Preserved beaches",
+    kerkennahFeature2: "Traditional fishing",
+    kerkennahFeature3: "300 days of sunshine/year",
+    kerkennahGallery: "Kerkennah Gallery",
+    satisfactionRate: "Satisfaction rate",
+    satisfiedCustomers: "Satisfied customers",
   }
 };
 
@@ -336,7 +356,7 @@ const Footer = ({ t, phoneNumber, whatsappMsg }) => {
   );
 };
 
-// Contact Section Component (replaces BEST OFFERS)
+// Contact Section Component
 const ContactSection = ({ t, phoneNumber, whatsappMsg }) => {
   return (
     <div id="contact-section" className="contact-section-modern">
@@ -359,6 +379,211 @@ const ContactSection = ({ t, phoneNumber, whatsappMsg }) => {
             <i className="fab fa-whatsapp"></i> WhatsApp Direct
           </a>
         </div>
+      </div>
+    </div>
+  );
+};
+
+// Kerkennah Location Section Component
+const KerkennahLocationSection = ({ t }) => {
+  const handleGalleryClick = () => {
+    // Navigate to gallery page - you can change this route later
+    window.location.href = "/kerkennah-gallery";
+  };
+
+  // Google Maps URL for Kerkennah
+  const googleMapsUrl = "https://www.google.com/maps/place/Kerkennah/data=!4m2!3m1!1s0x1301ac8b90185bc7:0x560489b737949fdf?sa=X&ved=1t:242&ictx=111";
+
+  const handleMapClick = () => {
+    window.open(googleMapsUrl, "_blank", "noopener,noreferrer");
+  };
+
+  return (
+   <section className="kerkennah-location-section">
+      <div className="kerkennah-container">
+        <div className="kerkennah-header">
+          <h2 className="kerkennah-title">{t.kerkennahTitle}</h2>
+          <p className="kerkennah-subtitle">{t.kerkennahSubtitle}</p>
+          <div className="kerkennah-line"></div>
+        </div>
+        
+        <div className="kerkennah-content">
+          <div className="kerkennah-info">
+            <p className="kerkennah-description">{t.kerkennahDesc}</p>
+            <div className="kerkennah-features">
+              <div className="kerkennah-feature">
+                <i className="fas fa-umbrella-beach"></i>
+                <span>{t.kerkennahFeature1}</span>
+              </div>
+              <div className="kerkennah-feature">
+                <i className="fas fa-fish"></i>
+                <span>{t.kerkennahFeature2}</span>
+              </div>
+              <div className="kerkennah-feature">
+                <i className="fas fa-sun"></i>
+                <span>{t.kerkennahFeature3}</span>
+              </div>
+            </div>
+            <button onClick={handleGalleryClick} className="kerkennah-gallery-link">
+              <i className="fas fa-images"></i>
+              {t.kerkennahGallery}
+              <i className="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          
+          <div className="kerkennah-map" onClick={handleMapClick} style={{ cursor: "pointer" }}>
+            <div className="map-placeholder">
+              <i className="fas fa-map-marked-alt"></i>
+              <p>📍 Localisation Kerkennah, Tunisie</p>
+              <small>Archipel de 12 îles • Distance: 20km de Sfax</small>
+              <div className="map-click-hint">
+                <i className="fas fa-external-link-alt"></i> Cliquez pour voir sur Google Maps
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Satisfaction Gauge Component with logo colors
+const SatisfactionGauge = ({ value = 92, label = "Satisfaction" }) => {
+  const radius = 70;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (value / 100) * circumference;
+  
+  return (
+    <div className="chart-container">
+      <h3 className="chart-title">
+        <i className="fas fa-chart-line" style={{ color: '#04B59F' }}></i>
+        Taux de satisfaction
+      </h3>
+      <div className="chart-wrapper">
+        <svg viewBox="0 0 200 120" className="gauge">
+          <circle cx="100" cy="100" r={radius} className="gauge__background" />
+          <circle 
+            cx="100" 
+            cy="100" 
+            r={radius} 
+            className="gauge__value"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            transform="rotate(-90 100 100)"
+          />
+          <text x="100" y="95" className="gauge__label">{value}%</text>
+          <text x="100" y="118" className="gauge__sub-label">{label}</text>
+        </svg>
+      </div>
+    </div>
+  );
+};
+
+// Stats Row with logo colors
+const StatsRow = ({ t }) => {
+  const stats = [
+    { number: "150+", label: "Séjours réussis", icon: "fa-calendar-check" },
+    { number: "98%", label: t.satisfiedCustomers || "Clients satisfaits", icon: "fa-smile" },
+    { number: "24/7", label: "Assistance", icon: "fa-headset" },
+    { number: "5★", label: "Note moyenne", icon: "fa-star" }
+  ];
+  
+  return (
+    <div className="stats-row">
+     
+    </div>
+  );
+};
+
+// Reusable Gallery Component with Titles
+const GallerySection = ({ title, images, imageTitles }) => (
+  <div className="modern-gallery-section">
+    <div className="modern-gallery-header">
+      <h2 className="modern-gallery-title">{title}</h2>
+      <div className="modern-gallery-line"></div>
+    </div>
+    <div className="modern-gallery-grid">
+      {images.map((image, index) => (
+        <div key={index} className="modern-gallery-card">
+          <div className="modern-gallery-image">
+            <img src={image} alt={`${title} ${index + 1}`} />
+            <div className="modern-gallery-overlay">
+              {/* <span>View Gallery</span> */}
+            </div>
+          </div>
+          {imageTitles && imageTitles[index] && (
+            <div className="modern-gallery-caption">
+              <h3 className="gallery-image-title">{imageTitles[index]}</h3>
+              <div className="gallery-title-line"></div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+// New Dual Image Component for Suits & Bathrooms
+// Suits & Bathrooms Section - Horizontal Layout with COMBINED description
+const SuitsAndBathsSection = ({ title, suitsImages, bathsImages, suitsTitles, bathsTitles }) => {
+  // Combine images into pairs (suit + bathroom) with combined titles
+  const pairs = suitsImages.map((suitImage, index) => ({
+    suit: suitImage,
+    bath: bathsImages[index % bathsImages.length],
+    combinedTitle: `${suitsTitles[index] || `Suite ${index + 1}`} & ${bathsTitles[index % bathsTitles.length] || `Salle de bain ${index + 1}`}`,
+    combinedSubtitle: "Luxueuse suite avec salle de bain attenante"
+  }));
+
+  return (
+    <div className="modern-gallery-section">
+      <div className="modern-gallery-header">
+        <h2 className="modern-gallery-title">{title}</h2>
+        <div className="modern-gallery-line"></div>
+      </div>
+      <div className="suits-baths-grid">
+        {pairs.map((pair, idx) => (
+          <div key={idx} className="suite-row">
+            {/* Two Images Side by Side */}
+            <div className="suite-images-wrapper">
+              {/* Suite Image */}
+              <div className="suite-image-container">
+                <div className="modern-gallery-image">
+                  <img src={pair.suit} alt={`Suite ${idx + 1}`} />
+                  <div className="modern-gallery-overlay">
+                    <span>View Suite</span>
+                  </div>
+                  <span className="image-badge">SUITE</span>
+                  <div className="image-overlay-icon">
+                    <i className="fas fa-bed"></i>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Bathroom Image */}
+              <div className="bath-image-container">
+                <div className="modern-gallery-image">
+                  <img src={pair.bath} alt={`Bathroom ${idx + 1}`} />
+                  <div className="modern-gallery-overlay">
+                    <span>View Bathroom</span>
+                  </div>
+                  <span className="image-badge">BATHROOM</span>
+                  <div className="image-overlay-icon">
+                    <i className="fas fa-bath"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Combined Description for Both Images */}
+            <div className="combined-caption">
+              <h3 className="combined-title">
+                {pair.combinedTitle}
+              </h3>
+              <p className="combined-subtitle">{pair.combinedSubtitle}</p>
+              <div className="combined-line"></div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -389,11 +614,19 @@ function App() {
 
   const frontImages = [c3, c2, c1, c4];
   
-  // Inside images array
-  const insideImages = [inside1, inside2, inside3, inside4];
+  // Inside images array - 3 images
+  const insideImages = [inside2, inside1, b2];
   
-  // Rooms images array
-  const roomsImages = [room1, room2, room3, room4];
+  // Inside image titles
+  const insideImageTitles = ["Salon", "Cuisine", "Salle de bain"];
+  
+  // Suits images (rooms)
+  const suitsImages = [room1, room2, room3, room4];
+  const suitsTitles = ["Suite Royale", "Suite Prestige", "Suite Familiale", "Suite Deluxe"];
+  
+  // Bathrooms images
+  const bathsImages = [b1, b2, b3, b4];
+  const bathsTitles = ["Salle de bain Spa", "Salle de bain Moderne", "Salle de bain Luxe", "Salle de bain Privée"];
 
   // WhatsApp configuration
   const phoneNumber = "21650123456";
@@ -453,33 +686,12 @@ function App() {
     setDarkMode(!darkMode);
   };
 
-  // Reusable Gallery Component
-  const GallerySection = ({ title, images }) => (
-    <div className="modern-gallery-section">
-      <div className="modern-gallery-header">
-        <h2 className="modern-gallery-title">{title}</h2>
-        <div className="modern-gallery-line"></div>
-      </div>
-      <div className="modern-gallery-grid">
-        {images.map((image, index) => (
-          <div key={index} className="modern-gallery-card">
-            <div className="modern-gallery-image">
-              <img src={image} alt={`${title} ${index + 1}`} />
-              <div className="modern-gallery-overlay">
-                <span>View Gallery</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
   const safetyDevices = [
     { key: 'fireExtinguisher', icon: '🧯' },
     { key: 'privateEntrance', icon: '🚪' },
     { key: 'smokeDetector', icon: '🚨' },
   ];
+  
 
   // Update WhatsApp message when language changes
   useEffect(() => {
@@ -516,8 +728,12 @@ function App() {
       {/* Hero Section - Full Screen Header */}
       <header className="hero-header">
         <nav className="nav">
-          <div className="logo">
-            {t.inHouse}
+          <div className="logo-container">
+            <img 
+              src={logoo}
+              alt="Property Logo"
+              className="logo-image"
+            />
           </div>
           <div className="nav-links">
             <a href="#" onClick={(e) => { e.preventDefault(); scrollToExterior(); }}>{t.home}</a>
@@ -538,7 +754,13 @@ function App() {
       <br/>
       <br/>
 
-      {/* COMPOSITION DU LOGEMENT Section (target for A PROPOS) */}
+      {/* KERKENNAH LOCATION SECTION */}
+      <KerkennahLocationSection t={t} />
+
+      {/* Stats Row with logo colors */}
+      <StatsRow t={t} />
+
+      {/* COMPOSITION DU LOGEMENT Section */}
       <div ref={compositionRef} className="composition-section">
         <div className="modern-gallery-header">
           <h2 className="modern-gallery-title">{t.composition}</h2>
@@ -608,16 +830,22 @@ function App() {
         </div>
       </section>
       
-      {/* OUTSIDE Gallery Section (target for ACCUEIL) */}
+      {/* OUTSIDE Gallery Section */}
       <div ref={exteriorRef}>
         <GallerySection title={t.outside} images={frontImages} />
       </div>
 
       {/* INSIDE Gallery Section */}
-      <GallerySection title={t.inside} images={insideImages} />
+      <GallerySection title={t.inside} images={insideImages} imageTitles={insideImageTitles} />
 
-      {/* ROOMS & BEDS Gallery Section */}
-      <GallerySection title={t.roomsAndBeds} images={roomsImages} />
+      {/* SUITS & BATHROOMS Section - NEW Dual Card Layout */}
+      <SuitsAndBathsSection 
+        title={t.roomsAndBeds}
+        suitsImages={suitsImages}
+        bathsImages={bathsImages}
+        suitsTitles={suitsTitles}
+        bathsTitles={bathsTitles}
+      />
 
       {/* About Property Section */}
       <section className="frs_about_property_section_x77">
@@ -747,7 +975,7 @@ function App() {
             <div className="amenities_left_x89">
               <div className="amenities_image_wrapper_x89">
                 <img 
-                  src={n2}
+                  src={c2}
                   alt="Property Amenities"
                   className="amenities_image_x89"
                 />
@@ -805,58 +1033,6 @@ function App() {
                   <span className="amenity_icon_x89">🚬</span>
                   <span className="amenity_name_x89">{t.smokingAllowed}</span>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="pricing_section_x90">
-        <div className="pricing_container_x90">
-          <h2 className="pricing_title_x90">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="1" x2="12" y2="23" />
-              <line x1="17" y1="5" x2="9.5" y2="10.5" />
-            </svg>
-            {t.pricing}
-          </h2>
-          
-          <div className="pricing_grid_x90">
-            <div className="pricing_card_x90">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <div className="pricing_info_x90">
-                <span className="pricing_label_x90">{t.extraPeople}</span>
-                <span className="pricing_value_x90">{t.prixx}</span>
-              </div>
-            </div>
-            
-            <div className="pricing_card_x90">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-              <div className="pricing_info_x90">
-                <span className="pricing_label_x90">{t.weekendPrice}</span>
-                <span className="pricing_value_x90">{t.weekendPriceValue}</span>
-              </div>
-            </div>
-            
-            <div className="pricing_card_x90">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="16" />
-                <line x1="8" y1="12" x2="16" y2="12" />
-              </svg>
-              <div className="pricing_info_x90">
-                <span className="pricing_label_x90">{t.cancellation}</span>
-                <span className="pricing_value_x90">{t.cancellationValue}</span>
               </div>
             </div>
           </div>
@@ -950,29 +1126,13 @@ function App() {
                 <span className="safety_name_x93">{t[device.key]}</span>
               </div>
             ))}
-        
           </div>
         </div>
       </section>
 
-      {/* Properties Section */}
-      <section className="properties-section">
-        <div className="properties-header">
-          <h2 className="section-title">{t.popularProperties}</h2>
-          <button className="view-all-btn">{t.viewAll}</button>
-        </div>
-        <div className="properties-grid">
-          {properties.map((property) => (
-            <div key={property.id} className="property-card">
-              <div className="property-image">
-                <img src={property.image} alt={property.title} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Properties Section - REMOVED - replaced with Suits & Baths section */}
       
-      {/* CONTACT SECTION - Replaces BEST OFFERS */}
+      {/* CONTACT SECTION */}
       <div ref={contactRef}>
         <ContactSection t={t} phoneNumber={phoneNumber} whatsappMsg={whatsappMsg} />
       </div>
