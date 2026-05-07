@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useNavigate } from 'react-router-dom';
+
 // Import local images correctly
 import c3 from './assets/cover/c3.jpg';
 import c2 from './assets/cover/c2.jpg';
@@ -18,15 +20,19 @@ import inside3 from './assets/cover/inside3.jpg';
 import inside4 from './assets/cover/inside4.jpg';
 
 // Import rooms images (replace with your actual images)
-import room1 from './assets/cover/room1.jpg';
-import room2 from './assets/cover/room2.jpg';
-import room3 from './assets/cover/room3.jpg';
-import room4 from './assets/cover/room4.jpg';
+import room1 from './assets/cover/new/s1.jpg';
+import room2 from './assets/cover/new/s2.jpg';
+import room3 from './assets/cover/new/s3.jpg';
+import room4 from './assets/cover/new/s4.jpg';
+import room5 from './assets/cover/new/c11.jpg'; // Add this if you have a 5th room image
 
-import b1 from './assets/cover/b1.jpg';
-import b2 from './assets/cover/b2.jpg';
-import b3 from './assets/cover/b3.jpg';
-import b4 from './assets/cover/b4.jpg';
+import b1 from './assets/cover/new/ts1.jpg';
+import b2 from './assets/cover/new/ts2.jpg';
+import b3 from './assets/cover/new/ts3.jpg';
+import b4 from './assets/cover/new/ts4.jpg';
+import c11 from './assets/cover/new/c11.jpg';
+import c22 from './assets/cover/new/c12.jpg';
+
 
 // Translation datas
 const translations = {
@@ -63,7 +69,7 @@ const translations = {
     // Gallery Section Titles
     outside: "EXTÉRIEUR",
     inside: "INTÉRIEUR",
-    roomsAndBeds: "SUITES ",
+    roomsAndBeds: "SUITES & CHAMBRES",
     // Properties section
     popularProperties: "SALLES DE BAINS & BATHROOMS",
     viewAll: "VOIR TOUS LES BIENS",
@@ -194,7 +200,7 @@ const translations = {
     compositionDesc: "Discover the layout and spaces of this magnificent villa",
     outside: "OUTSIDE",
     inside: "INSIDE",
-    roomsAndBeds: "SUITES ",
+    roomsAndBeds: "SUITES & ROOMS",
     popularProperties: "POPULAR PROPERTIES",
     viewAll: "VIEW ALL PROPERTIES",
     prop1Title: "5619 Walnut Hill Ln, Dallas, TX 75229",
@@ -338,14 +344,14 @@ const Footer = ({ t, phoneNumber, whatsappMsg }) => {
         <div className="footer-col">
           <h4>{t.followUs}</h4>
           <div className="footer-social">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61582236082971" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
             <a href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMsg)}`} target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
           </div>
         </div>
         <div className="footer-col">
           <h4>{t.contactUs}</h4>
-          <p>📞 +216 50 123 456</p>
+          <p>📞 +216 29 900 508</p>
           <p>✉️ contact@villakerkennah.tn</p>
         </div>
       </div>
@@ -355,7 +361,6 @@ const Footer = ({ t, phoneNumber, whatsappMsg }) => {
     </footer>
   );
 };
-
 // Contact Section Component
 const ContactSection = ({ t, phoneNumber, whatsappMsg }) => {
   return (
@@ -366,13 +371,13 @@ const ContactSection = ({ t, phoneNumber, whatsappMsg }) => {
           <h2><i className="fas fa-envelope-open-text"></i> {t.contactUs}</h2>
           <p className="contact-desc">{t.contactDesc}</p>
           <div className="contact-details">
-            <p><i className="fas fa-phone-alt"></i> <strong>{t.phoneLabel}:</strong> +216 50 123 456</p>
+            <p><i className="fas fa-phone-alt"></i> <strong>{t.phoneLabel}:</strong> +216 29 900 508</p>
             <p><i className="fas fa-envelope"></i> <strong>{t.emailLabel}:</strong> contact@villakerkennah.tn</p>
-            <p><i className="fas fa-map-marker-alt"></i> <strong>{t.addressLabel}:</strong> Route de Sidi Fredj, Kerkennah, Tunisie</p>
+            <p><i className="fas fa-map-marker-alt"></i> <strong>{t.addressLabel}:</strong> Ouled Yaneg, Kerkennah, Tunisie</p>
           </div>
           <div className="social-icons-modern">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61582236082971" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/villa_kyranis/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
             <a href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMsg)}`} className="whatsapp-btn-icon" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
           </div>
           <a href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMsg)}`} className="whatsapp-direct-btn" target="_blank" rel="noopener noreferrer">
@@ -386,20 +391,22 @@ const ContactSection = ({ t, phoneNumber, whatsappMsg }) => {
 
 // Kerkennah Location Section Component
 const KerkennahLocationSection = ({ t }) => {
+  const navigate = useNavigate(); // This is fine, but make sure it's imported at the top of App.jsx
+
   const handleGalleryClick = () => {
-    // Navigate to gallery page - you can change this route later
-    window.location.href = "/kerkennah-gallery";
+    // Navigate to gallery page
+    navigate('/kerkennah-gallery');
   };
-
+  
   // Google Maps URL for Kerkennah
-  const googleMapsUrl = "https://www.google.com/maps/place/Kerkennah/data=!4m2!3m1!1s0x1301ac8b90185bc7:0x560489b737949fdf?sa=X&ved=1t:242&ictx=111";
-
+  const googleMapsUrl = "https://www.google.com/maps/place/Ouled+Yaneg/data=!4m2!3m1!1s0x13004d1286823b27:0xc3a4d590880555ad?sa=X&ved=1t:242&ictx=111";
+  
   const handleMapClick = () => {
     window.open(googleMapsUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
-   <section className="kerkennah-location-section">
+    <section className="kerkennah-location-section">
       <div className="kerkennah-container">
         <div className="kerkennah-header">
           <h2 className="kerkennah-title">{t.kerkennahTitle}</h2>
@@ -523,14 +530,14 @@ const GallerySection = ({ title, images, imageTitles }) => (
   </div>
 );
 
-// New Dual Image Component for Suits & Bathrooms
-// Suits & Bathrooms Section - Horizontal Layout with COMBINED description
+// New Dual Image Component for Suits & Bathrooms with Chambre (Room n°5) using c11 and c12
+// New Dual Image Component for Suits & Bathrooms with Chambre (Room n°5) using c11 and c22
 const SuitsAndBathsSection = ({ title, suitsImages, bathsImages, suitsTitles, bathsTitles }) => {
   // Combine images into pairs (suit + bathroom) with combined titles
   const pairs = suitsImages.map((suitImage, index) => ({
     suit: suitImage,
     bath: bathsImages[index % bathsImages.length],
-    combinedTitle: `${suitsTitles[index] || `Suite ${index + 1}`} & ${bathsTitles[index % bathsTitles.length] || `Salle de bain ${index + 1}`}`,
+    combinedTitle: `${suitsTitles[index] || `Suite ${index + 1}`  }`,
     combinedSubtitle: "Luxueuse suite avec salle de bain attenante"
   }));
 
@@ -584,6 +591,51 @@ const SuitsAndBathsSection = ({ title, suitsImages, bathsImages, suitsTitles, ba
             </div>
           </div>
         ))}
+        
+        {/* CHAMBRE ROW (Room n°5) - TWO IMAGES side by side using c11 and c22 */}
+        <div className="suite-row chambre-row">
+          {/* Two Images Side by Side for Chambre */}
+          <div className="suite-images-wrapper">
+            {/* First Chambre Image - c11 */}
+            <div className="suite-image-container">
+              <div className="modern-gallery-image">
+                <img src={c11} alt="Chambre Vue 1" />
+                <div className="modern-gallery-overlay">
+                  <span>View Room</span>
+                </div>
+                <span className="image-badge chambre-badge">CHAMBRE</span>
+                <div className="image-overlay-icon">
+                  <i className="fas fa-bed"></i>
+                  <i className="fas fa-bed" style={{ marginLeft: '8px' }}></i>
+                </div>
+              </div>
+            </div>
+            
+            {/* Second Chambre Image - c22 */}
+            <div className="bath-image-container">
+              <div className="modern-gallery-image">
+                <img src={c22} alt="Chambre Vue 2" />
+                <div className="modern-gallery-overlay">
+                  <span>View Room</span>
+                </div>
+                <span className="image-badge chambre-badge">CHAMBRE</span>
+                <div className="image-overlay-icon">
+                  <i className="fas fa-bed"></i>
+                  <i className="fas fa-bed" style={{ marginLeft: '8px' }}></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Description for the Chambre */}
+          <div className="combined-caption">
+            <h3 className="combined-title">
+              Chambre Familiale
+            </h3>
+            <p className="combined-subtitle">Chambre confortable avec 2 lits, parfaite pour la famille</p>
+            <div className="combined-line"></div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -622,14 +674,14 @@ function App() {
   
   // Suits images (rooms)
   const suitsImages = [room1, room2, room3, room4];
-  const suitsTitles = ["Suite Royale", "Suite Prestige", "Suite Familiale", "Suite Deluxe"];
+  const suitsTitles = ["Suite 1", "Suite 2", "Suite 3", "Suite 4"];
   
   // Bathrooms images
   const bathsImages = [b1, b2, b3, b4];
   const bathsTitles = ["Salle de bain Spa", "Salle de bain Moderne", "Salle de bain Luxe", "Salle de bain Privée"];
 
   // WhatsApp configuration
-  const phoneNumber = "21650123456";
+  const phoneNumber = "📞 +216 29 900 508";
   const whatsappMsg = t.whatsappMsg;
 
   const properties = [
@@ -838,7 +890,7 @@ function App() {
       {/* INSIDE Gallery Section */}
       <GallerySection title={t.inside} images={insideImages} imageTitles={insideImageTitles} />
 
-      {/* SUITS & BATHROOMS Section - NEW Dual Card Layout */}
+      {/* SUITS & BATHROOMS Section - with new Chambre (Room n°5) */}
       <SuitsAndBathsSection 
         title={t.roomsAndBeds}
         suitsImages={suitsImages}

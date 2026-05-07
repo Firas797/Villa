@@ -2561,3 +2561,35 @@ body.dark-mode .suite-row:hover .combined-subtitle {
 body.dark-mode .map-click-hint {
   color: var(--logo-secondary);
 }
+/* Chambre Row Styles */
+.chambre-row {
+  flex-direction: column !important;
+}
+
+.chambre-single-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.chambre-image-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.chambre-badge {
+  background: linear-gradient(135deg, #2c3e50, #3498db) !important;
+}
+
+.image-overlay-icon i:first-child {
+  margin-right: 4px;
+}
+
+/* Responsive for chambre */
+@media (max-width: 768px) {
+  .chambre-image-container {
+    max-width: 100%;
+  }
+}
