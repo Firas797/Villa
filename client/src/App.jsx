@@ -27,9 +27,9 @@ import room4 from './assets/cover/new/s4.jpg';
 import room5 from './assets/cover/new/c11.jpg'; // Add this if you have a 5th room image
 
 import b1 from './assets/cover/new/ts1.jpg';
-import b2 from './assets/cover/new/ts2.jpg';
+import b2 from './assets/cover/new/ts4.jpg';
 import b3 from './assets/cover/new/ts3.jpg';
-import b4 from './assets/cover/new/ts4.jpg';
+import b4 from './assets/cover/new/ts2.jpg';
 import c11 from './assets/cover/new/c11.jpg';
 import c22 from './assets/cover/new/c12.jpg';
 
