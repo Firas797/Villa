@@ -40,6 +40,8 @@ const translations = {
     aboutPropertyTitle: "À PROPOS DU LOGEMENT",
     hostLabel: "Hôte",
     hostName: "Ramzi",
+    videoTitle: "VIDÉO",
+videoSubtitle: "Découvrez la villa en action",
     hostSince: "Hôte depuis 6 ans",
     aboutDesc1: "Ce logement paisible et luxueux offre un séjour détente pour toute la famille.",
     aboutDesc2: "Une demeure exceptionnelle conçue pour offrir confort, intimité et élégance avec des espaces généreux.",
@@ -170,6 +172,8 @@ const translations = {
     aboutPropertyTitle: "ABOUT THE PROPERTY",
     hostLabel: "Host",
     hostName: "Ramzi",
+    videoTitle: "VIDEO",
+videoSubtitle: "Discover the villa in action",
     hostSince: "Host for 6 years",
     aboutDesc1: "This peaceful and luxurious property offers a relaxing stay for the whole family.",
     aboutDesc2: "An exceptional residence designed to provide comfort, privacy, and elegance with spacious living areas.",
@@ -640,7 +644,39 @@ const SuitsAndBathsSection = ({ title, suitsImages, bathsImages, suitsTitles, ba
     </div>
   );
 };
-
+// Video Section Component
+const VideoSection = ({ t }) => {
+  // Direct embed URL for YouTube Shorts
+  const videoUrl = "https://www.youtube.com/embed/n8kfweG5uOg";
+  
+  return (
+    <div className="video-section">
+      <div className="video-container-custom">
+        <div className="video-header">
+          <h2 className="video-title">
+            <i className="fas fa-play-circle"></i>
+            {t.videoTitle || "VIDEO"}
+          </h2>
+          <div className="video-title-line"></div>
+          <p className="video-subtitle">
+            {t.videoSubtitle || "Découvrez la villa en action • Discover the villa in action"}
+          </p>
+        </div>
+        <div className="video-wrapper-custom">
+          <iframe
+            src={videoUrl}
+            title="YouTube Shorts Video"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className="custom-video-iframe"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  );
+};
 function App() {
   const [language, setLanguage] = useState('fr');
   const [darkMode, setDarkMode] = useState(() => {
@@ -901,6 +937,16 @@ function App() {
 
       {/* About Property Section */}
       <section className="frs_about_property_section_x77">
+        <SuitsAndBathsSection 
+  title={t.roomsAndBeds}
+  suitsImages={suitsImages}
+  bathsImages={bathsImages}
+  suitsTitles={suitsTitles}
+  bathsTitles={bathsTitles}
+/>
+
+{/* VIDEO SECTION - NEW */}
+<VideoSection t={t} />
         <div className="frs_about_container_x77">
           <div className="frs_about_content_x77">
             <div className="frs_about_left_x77">
